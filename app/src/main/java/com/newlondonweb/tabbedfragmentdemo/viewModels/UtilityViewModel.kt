@@ -1,9 +1,11 @@
 package com.newlondonweb.tabbedfragmentdemo.viewModels
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
+import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -11,11 +13,18 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.windsekirun.kalmankt.model.LocationKt
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.newlondonweb.tabbedfragmentdemo.R
 import com.newlondonweb.tabbedfragmentdemo.data.KalmanProcessor
 
 class UtilityViewModel(application: Application) : AndroidViewModel(application)  {
@@ -24,7 +33,7 @@ lateinit var locationManager: LocationManager
     lateinit var mainHandler: Handler
     private val kalmanProcessor = KalmanProcessor()
     private val track:ArrayList<Location> by lazy { arrayListOf<Location>() }
-
+    lateinit var mMap: GoogleMap
     internal val locations: LiveData<List<LocationKt>>
         get() = myLocations
     private val myLocations = MutableLiveData<List<LocationKt>>()
@@ -37,7 +46,8 @@ lateinit var locationManager: LocationManager
 
 
 
-    fun setup() {
+    fun setup(mMap: GoogleMap) {
+
         kalmanProcessor.setLocationCallback(1000L){ locationKt -> processLocation(locationKt) }
         locationManager = this.getApplication<Application>().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         mainHandler = Handler(Looper.getMainLooper())
@@ -46,11 +56,8 @@ lateinit var locationManager: LocationManager
     fun processLocation(locationKt: LocationKt) {
         if (myloc.last().getLatitude() != locationKt.getLatitude() || myloc.last().getLongitude() != locationKt.getLongitude()) {
             myloc.add(locationKt)
-            myLocations.value=myloc.takeLast(10)}
-        myloc.forEach {
-            Log.d("markerlist", " " + it.getLatitude() + " " + it.getLongitude())
+            myLocations.value=myloc.takeLast(10)
         }
-        Log.d("markerlist", " "+myloc.last().getLatitude() + " " +myloc.last().getLongitude() )
     }
 
     val updateScreen = object : Runnable {
@@ -58,13 +65,23 @@ lateinit var locationManager: LocationManager
         @SuppressLint("MissingPermission")
         override fun run() {
 
+            if (ActivityCompat.checkSelfPermission(
+                    application,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    application,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
                 100L,
                 0f,
                 locationListener
             )
-            mainHandler.postDelayed(this, 1000L)
+            mainHandler.postDelayed(this, 100L)
         }
 
         private val locationListener: LocationListener = object : LocationListener {
@@ -73,11 +90,23 @@ lateinit var locationManager: LocationManager
             override fun onProviderDisabled(p0: String?) {}
             override fun onLocationChanged(location: Location) {
                 track.add(location)
-
+                Log.d("markerlist", location.accuracy.toString())
                 kalmanProcessor.process(avgLocs(track))
                 Log.d("markerlist", location.toString())
             }
         }
+    }
+
+    fun reset(latLng: LatLng) {
+        val loc = LocationKt()
+        loc.setLatitude(latLng.latitude)
+        loc.setLongitude(latLng.longitude)
+        loc.setAccuracy(0.0)
+        kalmanProcessor.process(loc)
+        kalmanProcessor.process(loc)
+        kalmanProcessor.process(loc)
+        kalmanProcessor.process(loc)
+        kalmanProcessor.process(loc)
     }
 
     fun avgLocs(list: ArrayList<Location>) : Location{
@@ -94,4 +123,7 @@ lateinit var locationManager: LocationManager
         loc.longitude = lon
         return loc
     }
+
+
+
 }

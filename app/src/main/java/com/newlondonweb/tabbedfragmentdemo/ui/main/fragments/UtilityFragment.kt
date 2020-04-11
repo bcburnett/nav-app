@@ -19,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
@@ -76,15 +77,10 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
             ) != PackageManager.PERMISSION_GRANTED)
         ) {
             requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 123)
-        } else {
-            vm.setup()
-            vm.updateScreen.run()
         }
 
-        // observers
+//        // observers
         vm.locations.observe(viewLifecycleOwner, Observer {doDisplay(it)})
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -100,15 +96,23 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setOnMapClickListener {
+            vm.reset(it)
+        }
         mMap.mapType=GoogleMap.MAP_TYPE_NORMAL
+        vm.setup(mMap)
+        vm.updateScreen.run()
+
     }
 
     private fun doDisplay (locList: List<LocationKt>) {
         if(!::mMap.isInitialized) return
+        Log.d("marker", locList.last().getAccuracy().toString())
+        acc_view.text=locList.last().getAccuracy().toString()
         mMap.clear()
         val me = LatLng(locList.last().getLatitude(), locList.last().getLongitude())
         locList.forEach {
-            Log.d("markerlist", " "+it.getLatitude() + " " +it.getLongitude() )
+            Log.d("marker",it.toString())
             mMap.addMarker(
                 MarkerOptions()
                     .position(LatLng(it.getLatitude(), it.getLongitude()))
