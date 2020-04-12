@@ -1,5 +1,6 @@
 package com.newlondonweb.tabbedfragmentdemo.ui.main.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
@@ -48,6 +49,7 @@ private const val REQUEST_IMAGE_CAPTURE = 1
 
 class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
     lateinit var mMap: GoogleMap
+
     companion object {
         @Volatile
         private var INSTANCE: UtilityFragment? = null
@@ -112,7 +114,12 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
         Log.d("marker", locList.last().getAccuracy().toString())
         acc_view.text=locList.last().getAccuracy().toString()
         mMap.clear()
-        KmlLayer(mMap,R.raw.waldenstreetmarket,this.requireContext()).addLayerToMap()
+
+        try {
+            val kml =  resources.openRawResource(R.raw.waldenstreetmarket)
+            KmlLayer(mMap,kml,this.requireContext()).addLayerToMap()
+        }catch (e:Exception){Log.d("marker",e.toString())}
+
         val me = LatLng(locList.last().getLatitude(), locList.last().getLongitude())
         locList.forEach {
             Log.d("marker",it.toString())
@@ -129,7 +136,7 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
                 .center(me )
                 .radius(locList.last().getAccuracy()))
 
-        val zoom:Float =if(mMap.cameraPosition.zoom.toInt() == 2) 14f else mMap.cameraPosition.zoom
+        val zoom:Float =if(mMap.cameraPosition.zoom.toInt() == 2) 16f else mMap.cameraPosition.zoom
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(me, zoom))
     }
 

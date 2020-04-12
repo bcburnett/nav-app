@@ -55,7 +55,10 @@ lateinit var locationManager: LocationManager
 
     fun processLocation(locationKt: LocationKt) {
         if (myloc.last().getLatitude() != locationKt.getLatitude() || myloc.last().getLongitude() != locationKt.getLongitude()) {
-            locationKt.setAccuracy(track.last().accuracy.toDouble())
+            try {
+                locationKt.setAccuracy(track.last().accuracy.toDouble())
+            }catch (e:Exception){return}
+
             myloc.add(locationKt)
             myLocations.value=myloc.takeLast(10)
         }
@@ -78,7 +81,7 @@ lateinit var locationManager: LocationManager
             }
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
-                500L,
+                1000L,
                 0f,
                 locationListener
             )
@@ -92,25 +95,28 @@ lateinit var locationManager: LocationManager
             override fun onLocationChanged(location: Location) {
                 track.add(location)
                 Log.d("markerlist", location.accuracy.toString())
-                kalmanProcessor.process(avgLocs(track))
+                kalmanProcessor.process(avgLocs(track.takeLast(5) ))
                 Log.d("markerlist", location.toString())
             }
         }
     }
+
+    val location = Location("")
 
     fun reset(latLng: LatLng) {
         val loc = LocationKt()
         loc.setLatitude(latLng.latitude)
         loc.setLongitude(latLng.longitude)
         loc.setAccuracy(0.0)
-        kalmanProcessor.process(loc)
-        kalmanProcessor.process(loc)
-        kalmanProcessor.process(loc)
-        kalmanProcessor.process(loc)
-        kalmanProcessor.process(loc)
+        kalmanProcessor.reset(8,2)
+        kalmanProcessor.process(fromLocationKt(loc))
+        kalmanProcessor.process(fromLocationKt(loc))
+        kalmanProcessor.process(fromLocationKt(loc))
+        kalmanProcessor.process(fromLocationKt(loc))
+        kalmanProcessor.process(fromLocationKt(loc))
     }
 
-    fun avgLocs(list: ArrayList<Location>) : Location{
+    fun avgLocs(list: List<Location>) : Location{
         var lat = 0.0
         var lon = 0.0
         for(l in list){
@@ -123,6 +129,18 @@ lateinit var locationManager: LocationManager
         loc.latitude = lat
         loc.longitude = lon
         return loc
+    }
+
+    fun fromLocationKt(data: LocationKt): Location {
+        return Location("").apply {
+            latitude= data.getLatitude()
+            longitude= data.getLongitude()
+            accuracy = data.getAccuracy().toFloat()
+            altitude = data.getAltitude()
+            bearing= data.getBearing().toFloat()
+            speed= data.getSpeed().toFloat()
+            time = data.getTimestamp()
+        }
     }
 
 

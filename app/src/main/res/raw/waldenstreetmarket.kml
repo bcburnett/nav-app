@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>Untitled layer</name>
+    <name>Walden Street Market</name>
     <Style id="icon-503-DB4436-normal">
       <IconStyle>
         <color>ff3644db</color>
@@ -20,7 +20,7 @@
         <color>ff3644db</color>
         <scale>1.1</scale>
         <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+          <href>file://wht_blank_maps.png</href>
         </Icon>
         <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
       </IconStyle>
