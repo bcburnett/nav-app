@@ -48,13 +48,14 @@ lateinit var locationManager: LocationManager
 
     fun setup(mMap: GoogleMap) {
 
-        kalmanProcessor.setLocationCallback(1000L){ locationKt -> processLocation(locationKt) }
+        kalmanProcessor.setLocationCallback(5000L){ locationKt -> processLocation(locationKt) }
         locationManager = this.getApplication<Application>().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         mainHandler = Handler(Looper.getMainLooper())
     }
 
     fun processLocation(locationKt: LocationKt) {
         if (myloc.last().getLatitude() != locationKt.getLatitude() || myloc.last().getLongitude() != locationKt.getLongitude()) {
+            locationKt.setAccuracy(track.last().accuracy.toDouble())
             myloc.add(locationKt)
             myLocations.value=myloc.takeLast(10)
         }
@@ -77,11 +78,11 @@ lateinit var locationManager: LocationManager
             }
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
-                100L,
+                500L,
                 0f,
                 locationListener
             )
-            mainHandler.postDelayed(this, 100L)
+            mainHandler.postDelayed(this, 5000L)
         }
 
         private val locationListener: LocationListener = object : LocationListener {

@@ -8,7 +8,7 @@ public final class WordGuessFragment extends androidx.fragment.app.Fragment {
     private android.speech.tts.TextToSpeech mtts;
     private final kotlin.Lazy vm$delegate = null;
     private boolean keyboardActive = false;
-    private final java.lang.Integer[] image = {2131165355, 2131165356, 2131165357, 2131165358, 2131165359, 2131165360, 2131165361, 2131165361};
+    private final java.lang.Integer[] image = {2131165357, 2131165358, 2131165359, 2131165360, 2131165361, 2131165362, 2131165363, 2131165363};
     private static volatile com.newlondonweb.tabbedfragmentdemo.ui.main.fragments.WordGuessFragment INSTANCE;
     public static final com.newlondonweb.tabbedfragmentdemo.ui.main.fragments.WordGuessFragment.Companion Companion = null;
     private java.util.HashMap _$_findViewCache;

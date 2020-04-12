@@ -1408,6 +1408,8 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable amu_bubble_mask
+drawable amu_bubble_shadow
 drawable avd_hide_password
 drawable avd_show_password
 drawable background
@@ -1601,6 +1603,7 @@ id adjust_width
 id alertTitle
 id all
 id always
+id amu_text
 id async
 id auto
 id barrier
@@ -1919,7 +1922,9 @@ id view_pager
 id visible
 id visible_removing_fragment_view_tag
 id weatherFragment
+id webview
 id wide
+id window
 id withText
 id wordGuessFragment
 id wrap
@@ -1987,6 +1992,9 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout amu_info_window
+layout amu_text_bubble
+layout amu_webview
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -2078,6 +2086,8 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 navigation main
 plurals mtrl_badge_content_description
+raw canoeroute
+raw waldenstreetmarket
 raw x
 string A
 string B
@@ -2913,6 +2923,9 @@ style Widget_MaterialComponents_Toolbar_Primary
 style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_Support_CoordinatorLayout
+style amu_Bubble_TextAppearance_Dark
+style amu_Bubble_TextAppearance_Light
+style amu_ClusterIcon_TextAppearance
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth

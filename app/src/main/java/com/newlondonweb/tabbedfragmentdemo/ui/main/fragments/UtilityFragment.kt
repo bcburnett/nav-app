@@ -34,8 +34,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.data.kml.KmlLayer
 import com.newlondonweb.tabbedfragmentdemo.R
 import com.newlondonweb.tabbedfragmentdemo.R.layout.utility_fragment
 import com.newlondonweb.tabbedfragmentdemo.data.AppDataBase
@@ -110,6 +112,7 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
         Log.d("marker", locList.last().getAccuracy().toString())
         acc_view.text=locList.last().getAccuracy().toString()
         mMap.clear()
+        KmlLayer(mMap,R.raw.waldenstreetmarket,this.requireContext()).addLayerToMap()
         val me = LatLng(locList.last().getLatitude(), locList.last().getLongitude())
         locList.forEach {
             Log.d("marker",it.toString())
@@ -121,11 +124,10 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
         }
 
 
-        mMap.addMarker(
-            MarkerOptions()
-                .position(me )
-                .title(me.toString())
-                .icon(BitmapDescriptorFactory.fromResource(R.raw.x)))
+        mMap.addCircle(
+            CircleOptions()
+                .center(me )
+                .radius(locList.last().getAccuracy()))
 
         val zoom:Float =if(mMap.cameraPosition.zoom.toInt() == 2) 14f else mMap.cameraPosition.zoom
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(me, zoom))

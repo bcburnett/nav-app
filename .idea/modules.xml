@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Tabbed Fragment Demo.iml" filepath="$PROJECT_DIR$/Tabbed Fragment Demo.iml" group="Tabbed Fragment Demo" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Tabbed Fragment Demo/app" />
+      <module fileurl="file://$PROJECT_DIR$/nav-app-Tabbed Fragment Demo.iml" filepath="$PROJECT_DIR$/nav-app-Tabbed Fragment Demo.iml" group="Tabbed Fragment Demo" />
     </modules>
   </component>
 </project>

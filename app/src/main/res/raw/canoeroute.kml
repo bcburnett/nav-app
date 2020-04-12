@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>canoe route</name>
+    <Style id="icon-1899-0288D1-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-1200-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+    </Style>
+    <Style id="line-000000-1200-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="line-000000-1200">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-1200-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-1200-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-1200-nodesc-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-000000-1200-nodesc-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-000000-1200-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-1200-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-1200-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>entry</name>
+      <description>canoe landing</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -89.3385026,43.1002138,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>waypoint 2</name>
+      <description>Point bend in creek</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -89.3372927,43.0976366,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Leg-1</name>
+      <description>starkweather creek</description>
+      <styleUrl>#line-000000-1200</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -89.3384836,43.1002453,0
+          -89.3372874,43.0976875,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>waypoint 3</name>
+      <description>keep to right</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -89.3330337,43.0970261,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Leg 2</name>
+      <styleUrl>#line-000000-1200-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -89.3372925,43.0976669,0
+          -89.3371692,43.0975219,0
+          -89.3368366,43.0973339,0
+          -89.3363243,43.097285,0
+          -89.3352433,43.0972419,0
+          -89.3343877,43.0972615,0
+          -89.3335348,43.0972536,0
+          -89.3331754,43.0970891,0
+          -89.3330144,43.097093,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>waypoint 4</name>
+      <description>olbrich park</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -89.332646,43.0931236,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Leg 3</name>
+      <description>from split in creek to park</description>
+      <styleUrl>#line-000000-1200</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -89.3329893,43.0971426,0
+          -89.3328606,43.0965472,0
+          -89.3325065,43.0958186,0
+          -89.3321525,43.0954661,0
+          -89.3319808,43.094902,0
+          -89.3319915,43.0943693,0
+          -89.3321739,43.0938757,0
+          -89.3326138,43.0932489,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>waypoint 5</name>
+      <description>lake wimoma</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -89.3349075,43.0896956,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Leg 4</name>
+      <description>park to lake</description>
+      <styleUrl>#line-000000-1200</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -89.3326138,43.0932489,0
+          -89.3331051,43.0924691,0
+          -89.3337703,43.0915289,0
+          -89.3343926,43.0906514,0
+          -89.3348646,43.0899619,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>
