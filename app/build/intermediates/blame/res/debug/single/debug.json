@@ -184,10 +184,6 @@
         "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/layout/fragment_weather.xml"
     },
     {
-        "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/raw_wht_blank_maps.png.flat",
-        "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/raw/wht_blank_maps.png"
-    },
-    {
         "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
     },

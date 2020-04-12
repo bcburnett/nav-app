@@ -4,11 +4,8 @@
     <name>Walden Street Market</name>
     <Style id="icon-503-DB4436-normal">
       <IconStyle>
-        <color>ff3644db</color>
+        <color>000044db</color>
         <scale>1.1</scale>
-        <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
         <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
       </IconStyle>
       <LabelStyle>
@@ -17,11 +14,8 @@
     </Style>
     <Style id="icon-503-DB4436-highlight">
       <IconStyle>
-        <color>ff3644db</color>
+        <color>000044db</color>
         <scale>1.1</scale>
-        <Icon>
-          <href>file://wht_blank_maps.png</href>
-        </Icon>
         <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
       </IconStyle>
       <LabelStyle>
@@ -40,11 +34,8 @@
     </StyleMap>
     <Style id="icon-503-DB4436-nodesc-normal">
       <IconStyle>
-        <color>ff3644db</color>
+        <color>000044db</color>
         <scale>1.1</scale>
-        <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
         <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
       </IconStyle>
       <LabelStyle>
@@ -56,11 +47,8 @@
     </Style>
     <Style id="icon-503-DB4436-nodesc-highlight">
       <IconStyle>
-        <color>ff3644db</color>
+        <color>000044db</color>
         <scale>1.1</scale>
-        <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
         <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
       </IconStyle>
       <LabelStyle>
