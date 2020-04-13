@@ -2,57 +2,193 @@ package com.newlondonweb.tabbedfragmentdemo.data.weather;
 
 import java.lang.System;
 
-@kotlin.Metadata(mv = {1, 1, 16}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000,\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010 \n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u000e\n\u0002\b\f\n\u0002\u0010\u000b\n\u0002\b\u0002\n\u0002\u0010\b\n\u0002\b\u0002\b\u0086\b\u0018\u00002\u00020\u0001B#\u0012\f\u0010\u0002\u001a\b\u0012\u0004\u0012\u00020\u00040\u0003\u0012\u0006\u0010\u0005\u001a\u00020\u0006\u0012\u0006\u0010\u0007\u001a\u00020\u0006\u00a2\u0006\u0002\u0010\bJ\u000f\u0010\u000e\u001a\b\u0012\u0004\u0012\u00020\u00040\u0003H\u00c6\u0003J\t\u0010\u000f\u001a\u00020\u0006H\u00c6\u0003J\t\u0010\u0010\u001a\u00020\u0006H\u00c6\u0003J-\u0010\u0011\u001a\u00020\u00002\u000e\b\u0002\u0010\u0002\u001a\b\u0012\u0004\u0012\u00020\u00040\u00032\b\b\u0002\u0010\u0005\u001a\u00020\u00062\b\b\u0002\u0010\u0007\u001a\u00020\u0006H\u00c6\u0001J\u0013\u0010\u0012\u001a\u00020\u00132\b\u0010\u0014\u001a\u0004\u0018\u00010\u0001H\u00d6\u0003J\t\u0010\u0015\u001a\u00020\u0016H\u00d6\u0001J\t\u0010\u0017\u001a\u00020\u0006H\u00d6\u0001R\u0017\u0010\u0002\u001a\b\u0012\u0004\u0012\u00020\u00040\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\t\u0010\nR\u0011\u0010\u0005\u001a\u00020\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\u000b\u0010\fR\u0011\u0010\u0007\u001a\u00020\u0006\u00a2\u0006\b\n\u0000\u001a\u0004\b\r\u0010\f\u00a8\u0006\u0018"}, d2 = {"Lcom/newlondonweb/tabbedfragmentdemo/data/weather/Daily;", "", "data", "", "Lcom/newlondonweb/tabbedfragmentdemo/data/weather/DataXX;", "icon", "", "summary", "(Ljava/util/List;Ljava/lang/String;Ljava/lang/String;)V", "getData", "()Ljava/util/List;", "getIcon", "()Ljava/lang/String;", "getSummary", "component1", "component2", "component3", "copy", "equals", "", "other", "hashCode", "", "toString", "app_debug"})
+@kotlin.Metadata(mv = {1, 1, 16}, bv = {1, 0, 3}, k = 1, d1 = {"\u0000B\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\b\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\b\u0004\n\u0002\u0010\u0006\n\u0002\b\u0007\n\u0002\u0010\u000e\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b*\n\u0002\u0010\u000b\n\u0002\b\u0004\b\u0086\b\u0018\u00002\u00020\u0001B\u009d\u0001\u0012\u0006\u0010\u0002\u001a\u00020\u0003\u0012\u0006\u0010\u0004\u001a\u00020\u0003\u0012\u0006\u0010\u0005\u001a\u00020\u0003\u0012\u0006\u0010\u0006\u001a\u00020\u0007\u0012\u0006\u0010\b\u001a\u00020\u0007\u0012\u0006\u0010\t\u001a\u00020\u0003\u0012\u0006\u0010\n\u001a\u00020\u0003\u0012\u0006\u0010\u000b\u001a\u00020\f\u0012\u0006\u0010\r\u001a\u00020\u0003\u0012\u0006\u0010\u000e\u001a\u00020\f\u0012\u0006\u0010\u000f\u001a\u00020\u0003\u0012\u0006\u0010\u0010\u001a\u00020\f\u0012\u0006\u0010\u0011\u001a\u00020\f\u0012\u0006\u0010\u0012\u001a\u00020\u0003\u0012\u0006\u0010\u0013\u001a\u00020\u0014\u0012\u0006\u0010\u0015\u001a\u00020\u0014\u0012\u0016\u0010\u0016\u001a\u0012\u0012\u0004\u0012\u00020\u00180\u0017j\b\u0012\u0004\u0012\u00020\u0018`\u0019\u00a2\u0006\u0002\u0010\u001aJ\t\u00101\u001a\u00020\u0003H\u00c6\u0003J\t\u00102\u001a\u00020\fH\u00c6\u0003J\t\u00103\u001a\u00020\u0003H\u00c6\u0003J\t\u00104\u001a\u00020\fH\u00c6\u0003J\t\u00105\u001a\u00020\fH\u00c6\u0003J\t\u00106\u001a\u00020\u0003H\u00c6\u0003J\t\u00107\u001a\u00020\u0014H\u00c6\u0003J\t\u00108\u001a\u00020\u0014H\u00c6\u0003J\u0019\u00109\u001a\u0012\u0012\u0004\u0012\u00020\u00180\u0017j\b\u0012\u0004\u0012\u00020\u0018`\u0019H\u00c6\u0003J\t\u0010:\u001a\u00020\u0003H\u00c6\u0003J\t\u0010;\u001a\u00020\u0003H\u00c6\u0003J\t\u0010<\u001a\u00020\u0007H\u00c6\u0003J\t\u0010=\u001a\u00020\u0007H\u00c6\u0003J\t\u0010>\u001a\u00020\u0003H\u00c6\u0003J\t\u0010?\u001a\u00020\u0003H\u00c6\u0003J\t\u0010@\u001a\u00020\fH\u00c6\u0003J\t\u0010A\u001a\u00020\u0003H\u00c6\u0003J\u00c3\u0001\u0010B\u001a\u00020\u00002\b\b\u0002\u0010\u0002\u001a\u00020\u00032\b\b\u0002\u0010\u0004\u001a\u00020\u00032\b\b\u0002\u0010\u0005\u001a\u00020\u00032\b\b\u0002\u0010\u0006\u001a\u00020\u00072\b\b\u0002\u0010\b\u001a\u00020\u00072\b\b\u0002\u0010\t\u001a\u00020\u00032\b\b\u0002\u0010\n\u001a\u00020\u00032\b\b\u0002\u0010\u000b\u001a\u00020\f2\b\b\u0002\u0010\r\u001a\u00020\u00032\b\b\u0002\u0010\u000e\u001a\u00020\f2\b\b\u0002\u0010\u000f\u001a\u00020\u00032\b\b\u0002\u0010\u0010\u001a\u00020\f2\b\b\u0002\u0010\u0011\u001a\u00020\f2\b\b\u0002\u0010\u0012\u001a\u00020\u00032\b\b\u0002\u0010\u0013\u001a\u00020\u00142\b\b\u0002\u0010\u0015\u001a\u00020\u00142\u0018\b\u0002\u0010\u0016\u001a\u0012\u0012\u0004\u0012\u00020\u00180\u0017j\b\u0012\u0004\u0012\u00020\u0018`\u0019H\u00c6\u0001J\u0013\u0010C\u001a\u00020D2\b\u0010E\u001a\u0004\u0018\u00010\u0001H\u00d6\u0003J\t\u0010F\u001a\u00020\u0003H\u00d6\u0001J\t\u0010G\u001a\u00020\u0014H\u00d6\u0001R\u0011\u0010\r\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001b\u0010\u001cR\u0011\u0010\u000b\u001a\u00020\f\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001d\u0010\u001eR\u0011\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u001f\u0010\u001cR\u0011\u0010\b\u001a\u00020\u0007\u00a2\u0006\b\n\u0000\u001a\u0004\b \u0010!R\u0011\u0010\n\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\"\u0010\u001cR\u0011\u0010\t\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b#\u0010\u001cR\u0011\u0010\u0013\u001a\u00020\u0014\u00a2\u0006\b\n\u0000\u001a\u0004\b$\u0010%R\u0011\u0010\u0015\u001a\u00020\u0014\u00a2\u0006\b\n\u0000\u001a\u0004\b&\u0010%R\u0011\u0010\u0004\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\'\u0010\u001cR\u0011\u0010\u0005\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b(\u0010\u001cR\u0011\u0010\u0006\u001a\u00020\u0007\u00a2\u0006\b\n\u0000\u001a\u0004\b)\u0010!R\u0011\u0010\u000e\u001a\u00020\f\u00a2\u0006\b\n\u0000\u001a\u0004\b*\u0010\u001eR\u0011\u0010\u000f\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b+\u0010\u001cR!\u0010\u0016\u001a\u0012\u0012\u0004\u0012\u00020\u00180\u0017j\b\u0012\u0004\u0012\u00020\u0018`\u0019\u00a2\u0006\b\n\u0000\u001a\u0004\b,\u0010-R\u0011\u0010\u0012\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b.\u0010\u001cR\u0011\u0010\u0011\u001a\u00020\f\u00a2\u0006\b\n\u0000\u001a\u0004\b/\u0010\u001eR\u0011\u0010\u0010\u001a\u00020\f\u00a2\u0006\b\n\u0000\u001a\u0004\b0\u0010\u001e\u00a8\u0006H"}, d2 = {"Lcom/newlondonweb/tabbedfragmentdemo/data/weather/Daily;", "", "dt", "", "sunrise", "sunset", "temp", "Lcom/newlondonweb/tabbedfragmentdemo/data/weather/Temperature;", "feels_like", "pressure", "humidity", "dew_point", "", "clouds", "uvi", "visibility", "wind_speed", "wind_gust", "wind_deg", "rain", "", "snow", "weather", "Ljava/util/ArrayList;", "Lcom/newlondonweb/tabbedfragmentdemo/data/weather/MWeather;", "Lkotlin/collections/ArrayList;", "(IIILcom/newlondonweb/tabbedfragmentdemo/data/weather/Temperature;Lcom/newlondonweb/tabbedfragmentdemo/data/weather/Temperature;IIDIDIDDILjava/lang/String;Ljava/lang/String;Ljava/util/ArrayList;)V", "getClouds", "()I", "getDew_point", "()D", "getDt", "getFeels_like", "()Lcom/newlondonweb/tabbedfragmentdemo/data/weather/Temperature;", "getHumidity", "getPressure", "getRain", "()Ljava/lang/String;", "getSnow", "getSunrise", "getSunset", "getTemp", "getUvi", "getVisibility", "getWeather", "()Ljava/util/ArrayList;", "getWind_deg", "getWind_gust", "getWind_speed", "component1", "component10", "component11", "component12", "component13", "component14", "component15", "component16", "component17", "component2", "component3", "component4", "component5", "component6", "component7", "component8", "component9", "copy", "equals", "", "other", "hashCode", "toString", "app_debug"})
 public final class Daily {
+    private final int dt = 0;
+    private final int sunrise = 0;
+    private final int sunset = 0;
     @org.jetbrains.annotations.NotNull()
-    private final java.util.List<com.newlondonweb.tabbedfragmentdemo.data.weather.DataXX> data = null;
+    private final com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature temp = null;
     @org.jetbrains.annotations.NotNull()
-    private final java.lang.String icon = null;
+    private final com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature feels_like = null;
+    private final int pressure = 0;
+    private final int humidity = 0;
+    private final double dew_point = 0.0;
+    private final int clouds = 0;
+    private final double uvi = 0.0;
+    private final int visibility = 0;
+    private final double wind_speed = 0.0;
+    private final double wind_gust = 0.0;
+    private final int wind_deg = 0;
     @org.jetbrains.annotations.NotNull()
-    private final java.lang.String summary = null;
+    private final java.lang.String rain = null;
+    @org.jetbrains.annotations.NotNull()
+    private final java.lang.String snow = null;
+    @org.jetbrains.annotations.NotNull()
+    private final java.util.ArrayList<com.newlondonweb.tabbedfragmentdemo.data.weather.MWeather> weather = null;
+    
+    public final int getDt() {
+        return 0;
+    }
+    
+    public final int getSunrise() {
+        return 0;
+    }
+    
+    public final int getSunset() {
+        return 0;
+    }
     
     @org.jetbrains.annotations.NotNull()
-    public final java.util.List<com.newlondonweb.tabbedfragmentdemo.data.weather.DataXX> getData() {
+    public final com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature getTemp() {
         return null;
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getIcon() {
+    public final com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature getFeels_like() {
+        return null;
+    }
+    
+    public final int getPressure() {
+        return 0;
+    }
+    
+    public final int getHumidity() {
+        return 0;
+    }
+    
+    public final double getDew_point() {
+        return 0.0;
+    }
+    
+    public final int getClouds() {
+        return 0;
+    }
+    
+    public final double getUvi() {
+        return 0.0;
+    }
+    
+    public final int getVisibility() {
+        return 0;
+    }
+    
+    public final double getWind_speed() {
+        return 0.0;
+    }
+    
+    public final double getWind_gust() {
+        return 0.0;
+    }
+    
+    public final int getWind_deg() {
+        return 0;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String getRain() {
         return null;
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final java.lang.String getSummary() {
+    public final java.lang.String getSnow() {
         return null;
     }
     
-    public Daily(@org.jetbrains.annotations.NotNull()
-    java.util.List<com.newlondonweb.tabbedfragmentdemo.data.weather.DataXX> data, @org.jetbrains.annotations.NotNull()
-    java.lang.String icon, @org.jetbrains.annotations.NotNull()
-    java.lang.String summary) {
+    @org.jetbrains.annotations.NotNull()
+    public final java.util.ArrayList<com.newlondonweb.tabbedfragmentdemo.data.weather.MWeather> getWeather() {
+        return null;
+    }
+    
+    public Daily(int dt, int sunrise, int sunset, @org.jetbrains.annotations.NotNull()
+    com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature temp, @org.jetbrains.annotations.NotNull()
+    com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature feels_like, int pressure, int humidity, double dew_point, int clouds, double uvi, int visibility, double wind_speed, double wind_gust, int wind_deg, @org.jetbrains.annotations.NotNull()
+    java.lang.String rain, @org.jetbrains.annotations.NotNull()
+    java.lang.String snow, @org.jetbrains.annotations.NotNull()
+    java.util.ArrayList<com.newlondonweb.tabbedfragmentdemo.data.weather.MWeather> weather) {
         super();
     }
     
+    public final int component1() {
+        return 0;
+    }
+    
+    public final int component2() {
+        return 0;
+    }
+    
+    public final int component3() {
+        return 0;
+    }
+    
     @org.jetbrains.annotations.NotNull()
-    public final java.util.List<com.newlondonweb.tabbedfragmentdemo.data.weather.DataXX> component1() {
+    public final com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature component4() {
         return null;
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final java.lang.String component2() {
+    public final com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature component5() {
+        return null;
+    }
+    
+    public final int component6() {
+        return 0;
+    }
+    
+    public final int component7() {
+        return 0;
+    }
+    
+    public final double component8() {
+        return 0.0;
+    }
+    
+    public final int component9() {
+        return 0;
+    }
+    
+    public final double component10() {
+        return 0.0;
+    }
+    
+    public final int component11() {
+        return 0;
+    }
+    
+    public final double component12() {
+        return 0.0;
+    }
+    
+    public final double component13() {
+        return 0.0;
+    }
+    
+    public final int component14() {
+        return 0;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.lang.String component15() {
         return null;
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final java.lang.String component3() {
+    public final java.lang.String component16() {
         return null;
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final com.newlondonweb.tabbedfragmentdemo.data.weather.Daily copy(@org.jetbrains.annotations.NotNull()
-    java.util.List<com.newlondonweb.tabbedfragmentdemo.data.weather.DataXX> data, @org.jetbrains.annotations.NotNull()
-    java.lang.String icon, @org.jetbrains.annotations.NotNull()
-    java.lang.String summary) {
+    public final java.util.ArrayList<com.newlondonweb.tabbedfragmentdemo.data.weather.MWeather> component17() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final com.newlondonweb.tabbedfragmentdemo.data.weather.Daily copy(int dt, int sunrise, int sunset, @org.jetbrains.annotations.NotNull()
+    com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature temp, @org.jetbrains.annotations.NotNull()
+    com.newlondonweb.tabbedfragmentdemo.data.weather.Temperature feels_like, int pressure, int humidity, double dew_point, int clouds, double uvi, int visibility, double wind_speed, double wind_gust, int wind_deg, @org.jetbrains.annotations.NotNull()
+    java.lang.String rain, @org.jetbrains.annotations.NotNull()
+    java.lang.String snow, @org.jetbrains.annotations.NotNull()
+    java.util.ArrayList<com.newlondonweb.tabbedfragmentdemo.data.weather.MWeather> weather) {
         return null;
     }
     

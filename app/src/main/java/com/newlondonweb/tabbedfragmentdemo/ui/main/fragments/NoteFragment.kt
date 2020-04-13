@@ -52,7 +52,7 @@ class NoteFragment : Fragment(), LifecycleOwner {
     }
 
 
-    val vm: NoteViewModel by lazy { this.activity.let { ViewModelProvider(it!!).get(NoteViewModel::class.java) } }
+    private val vm: NoteViewModel by lazy { this.activity.let { ViewModelProvider(it!!).get(NoteViewModel::class.java) } }
 
     private val va: NoteAdapter = NoteAdapter(frag = this)
     private var mfile: File? = null
@@ -87,7 +87,7 @@ class NoteFragment : Fragment(), LifecycleOwner {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = va
 
-        vm.allNotes.observe(this, Observer {
+        vm.allNotes.observe(viewLifecycleOwner, Observer {
             va.setNotes(it)
         })
 

@@ -1612,7 +1612,6 @@ id blocking
 id bottom
 id btn_Add
 id btn_Cancel
-id btn_Darksky
 id btn_Edit
 id btn_Reset
 id btn_edit_Cancel
@@ -1810,6 +1809,7 @@ id right_side
 id rounded
 id rv_Notes
 id rv_Todos
+id rv_Weather
 id satellite
 id save_non_transition_alpha
 id save_overlay_view
@@ -1903,7 +1903,6 @@ id tv_Date
 id tv_Forcast
 id tv_Note
 id tv_Phrase
-id tv_Precip
 id tv_Priority
 id tv_Temp
 id tv_Title
@@ -1923,6 +1922,13 @@ id visible
 id visible_removing_fragment_view_tag
 id weatherFragment
 id webview
+id wi_cloud
+id wi_feelsLike
+id wi_forecast
+id wi_humidity
+id wi_temp
+id wi_time
+id wi_wind
 id wide
 id window
 id withText
@@ -2082,6 +2088,7 @@ layout text_view_with_theme_line_height
 layout text_view_without_line_height
 layout todo_item
 layout utility_fragment
+layout weather_item
 mipmap ic_launcher
 mipmap ic_launcher_round
 navigation main
@@ -2096,9 +2103,11 @@ string D
 string Details
 string E
 string F
+string FeelsLike
 string G
 string H
 string HMImage
+string Humidity
 string I
 string J
 string K
@@ -2113,6 +2122,8 @@ string R
 string RESET
 string S
 string T
+string Temperature
+string Time
 string Title
 string U
 string V
@@ -2160,6 +2171,7 @@ string chip_text
 string city
 string clear_text_end_icon_content_description
 string close
+string cloudcover
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
 string common_google_play_services_enable_title
@@ -2186,6 +2198,7 @@ string exposed_dropdown_menu_content_description
 string f3databuttontext
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string forecast
 string google_maps_key
 string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
@@ -2245,6 +2258,7 @@ string tab_text_5
 string tab_text_6
 string take_pic
 string update
+string windspeed
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

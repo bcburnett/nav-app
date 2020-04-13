@@ -34,9 +34,9 @@ lateinit var locationManager: LocationManager
     private val kalmanProcessor = KalmanProcessor()
     private val track:ArrayList<Location> by lazy { arrayListOf<Location>() }
     lateinit var mMap: GoogleMap
-    internal val locations: LiveData<List<LocationKt>>
+    internal val locations: LiveData<List<Location>>
         get() = myLocations
-    private val myLocations = MutableLiveData<List<LocationKt>>()
+    private val myLocations = MutableLiveData<List<Location>>()
 
     private val myloc = arrayListOf(
         LocationKt()
@@ -47,7 +47,7 @@ lateinit var locationManager: LocationManager
 
 
     fun setup(mMap: GoogleMap) {
-
+        kalmanProcessor.reset(8, 5)
         kalmanProcessor.setLocationCallback(5000L){ locationKt -> processLocation(locationKt) }
         locationManager = this.getApplication<Application>().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         mainHandler = Handler(Looper.getMainLooper())
@@ -60,7 +60,7 @@ lateinit var locationManager: LocationManager
             }catch (e:Exception){return}
 
             myloc.add(locationKt)
-            myLocations.value=myloc.takeLast(10)
+            myLocations.value=track.takeLast(10)
         }
     }
 

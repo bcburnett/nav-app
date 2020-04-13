@@ -45,7 +45,7 @@
     <string name="take_pic">Take Picture</string>
     <string name="close">Close</string>
     <string name="call">Make Call</string>
-    <string name="city">Current weather conditions at </string>
+    <string name="city">Current weather conditions at : </string>
     <string name="darksky">More at DarkSky.net</string>
     <string name="busmap">Bus Map</string>
     <string name="musicPlayer">Music</string>
@@ -56,4 +56,12 @@
     <string name="email">Launch Gmail</string>
     <string name="ss"><![CDATA[Stop & Shop]]></string>
     <string name="record">Record</string>
+    <string name="Temperature">Temperature</string>
+    <string name="Time">Time</string>
+    <string name="FeelsLike">Feels Like</string>
+    <string name="Humidity">Humidity</string>
+    <string name="cloudcover">Cloud Cover</string>
+    <string name="windspeed">Wind Speed</string>
+    <string name="forecast">Forecast</string>
+
 </resources>

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
@@ -44,6 +45,7 @@ import com.newlondonweb.tabbedfragmentdemo.R.layout.utility_fragment
 import com.newlondonweb.tabbedfragmentdemo.data.AppDataBase
 import com.newlondonweb.tabbedfragmentdemo.viewModels.UtilityViewModel
 import kotlinx.android.synthetic.main.utility_fragment.*
+import java.util.ArrayList
 
 private const val REQUEST_IMAGE_CAPTURE = 1
 
@@ -109,23 +111,40 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
 
     }
 
-    private fun doDisplay (locList: List<LocationKt>) {
+    private fun doDisplay (locList: List<Location>) {
         if(!::mMap.isInitialized) return
-        Log.d("marker", locList.last().getAccuracy().toString())
-        acc_view.text=locList.last().getAccuracy().toString()
+
+        val kml =  resources.openRawResource(R.raw.waldenstreetmarket)
+        Log.d("marker", locList.last().accuracy.toString())
+        acc_view.text=locList.last().accuracy.toString()
         mMap.clear()
 
         try {
-            val kml =  resources.openRawResource(R.raw.waldenstreetmarket)
-            KmlLayer(mMap,kml,this.requireContext()).addLayerToMap()
-        }catch (e:Exception){Log.d("marker",e.toString())}
+            val kmlLayer =KmlLayer(mMap,kml,this.requireContext())
+            val pathPoints = ArrayList<LatLng>()
 
-        val me = LatLng(locList.last().getLatitude(), locList.last().getLongitude())
+            if (kmlLayer?.containers != null) {
+                kmlLayer.containers.forEach { kmlContainer ->
+                    kmlContainer.placemarks.forEach{
+                        if(it.geometry.geometryType == "Point"){
+                            pathPoints.add(it.geometry.geometryObject as LatLng)
+                        }
+                    }
+                }
+            }
+
+            pathPoints.forEach {
+                mMap.addMarker(MarkerOptions().position(it).alpha(0.25F))
+            }
+            kmlLayer.addLayerToMap()
+        }catch (e:Exception){Log.d("marker",e.toString()); return}
+
+        val me = LatLng(locList.last().latitude, locList.last().longitude)
         locList.forEach {
             Log.d("marker",it.toString())
             mMap.addMarker(
                 MarkerOptions()
-                    .position(LatLng(it.getLatitude(), it.getLongitude()))
+                    .position(LatLng(it.latitude, it.longitude))
                     .title(me.toString())
                     .icon(BitmapDescriptorFactory.defaultMarker()))
         }
@@ -134,7 +153,7 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
         mMap.addCircle(
             CircleOptions()
                 .center(me )
-                .radius(locList.last().getAccuracy()))
+                .radius(locList.last().accuracy.toDouble()))
 
         val zoom:Float =if(mMap.cameraPosition.zoom.toInt() == 2) 16f else mMap.cameraPosition.zoom
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(me, zoom))

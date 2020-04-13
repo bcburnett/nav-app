@@ -11,14 +11,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
+import com.newlondonweb.tabbedfragmentdemo.R
 import com.newlondonweb.tabbedfragmentdemo.R.layout.fragment_weather
 import com.newlondonweb.tabbedfragmentdemo.data.weather.Weather
+import com.newlondonweb.tabbedfragmentdemo.ui.main.dataadapters.WeatherAdapter
 import kotlinx.android.synthetic.main.fragment_weather.*
 import java.util.*
 
@@ -36,7 +39,7 @@ class WeatherFragment : Fragment() {
             return INSTANCE as WeatherFragment
         }
     }
-
+    private val va = WeatherAdapter(frag = this)
     private val connectivityManager =
         this.parentFragment?.activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
 
@@ -51,8 +54,13 @@ class WeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val recyclerView = rv_Weather
+
+        recyclerView.layoutManager = GridLayoutManager(this.context, 1)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = va
         tv_Forcast.setOnClickListener { getWeather() }
-        btn_Darksky.setOnClickListener { callDarkSky() }
         getWeather()
     }
 
@@ -73,11 +81,11 @@ class WeatherFragment : Fragment() {
         }
 
     private fun doHttpRequestForWeather(location: Location) {
-        Volley.newRequestQueue(this.context).also {
-            it.add(
+        Volley.newRequestQueue(this.context).also { requestQueue ->
+            requestQueue.add(
                 JsonObjectRequest(
                     Request.Method.GET,
-                    "https://api.darksky.net/forecast/df21590bac42f7d8c00218ff445f6de7/${location.latitude},${location.longitude}",
+                    "https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&units=imperial&appid=2e47deaedc70f784b3aabcab50a2e950",
                     null,
                     {
                         doDisplay(
@@ -87,7 +95,7 @@ class WeatherFragment : Fragment() {
                     },
                     { Log.d("TAG", it.toString()) })
             )
-            it.start()
+            requestQueue.start()
         }
 
 
@@ -95,11 +103,12 @@ class WeatherFragment : Fragment() {
 
 
     private fun doDisplay(json: Weather, location: Location) {
-        val unixSeconds: Long = json.currently.time.toLong()
+        Log.d("marker", json.hourly.toString())
+        val unixSeconds: Long = json.current.dt.toLong()
         val date = Date(unixSeconds * 1000L)
         val sdfDate = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z", Locale.US)
             .apply { timeZone = TimeZone.getDefault() }
-
+//
         tv_Date.text = sdfDate.format(date)
         tv_City.text = try {
             Geocoder(this.context, Locale.US).getFromLocation(
@@ -110,8 +119,8 @@ class WeatherFragment : Fragment() {
         } catch (e: Throwable) {
             "Default"
         }
-        tv_Temp.text = "Current Temperature: ${json.currently.temperature.toString()}"
-        tv_Precip.text = "Chance of rain: ${json.currently.precipProbability.toString()}"
-        tv_Forcast.text = "${json.currently.summary}\n${json.hourly.summary}\n${json.daily.summary}"
+        tv_Temp.text = "Current Temperature: ${json.current.temp.toString()}"
+        tv_Forcast.text = " Current Weather Conditions: ${json.current.weather[0].main} ${json.current.weather[0].description}"
+        va.setHours(json.hourly)
     }
 }

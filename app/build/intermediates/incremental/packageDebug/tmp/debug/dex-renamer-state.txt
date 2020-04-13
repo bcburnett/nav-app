@@ -1,4 +1,4 @@
-#Sun Apr 12 10:21:29 EDT 2020
+#Mon Apr 13 09:19:05 EDT 2020
 base.0=/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex
