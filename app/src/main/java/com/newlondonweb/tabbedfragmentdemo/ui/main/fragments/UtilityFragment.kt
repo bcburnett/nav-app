@@ -102,11 +102,8 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        mMap.setOnMapClickListener {
-            vm.reset(it)
-        }
+
         mMap.mapType=GoogleMap.MAP_TYPE_NORMAL
-        vm.setup(mMap)
         vm.updateScreen.run()
 
     }
@@ -123,7 +120,7 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
             val kmlLayer =KmlLayer(mMap,kml,this.requireContext())
             val pathPoints = ArrayList<LatLng>()
 
-            if (kmlLayer?.containers != null) {
+            if (kmlLayer.containers != null) {
                 kmlLayer.containers.forEach { kmlContainer ->
                     kmlContainer.placemarks.forEach{
                         if(it.geometry.geometryType == "Point"){

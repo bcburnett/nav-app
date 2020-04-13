@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -61,18 +62,12 @@ class WeatherFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = va
         tv_Forcast.setOnClickListener { getWeather() }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getWeather()
     }
-
-    private fun callDarkSky() = fusedLocationClient.lastLocation.addOnSuccessListener {
-        it ?: return@addOnSuccessListener
-        Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://darksky.net/forecast/${it.latitude}%2C${it.longitude}/us12")
-        ).also { startActivity(it) }
-    }
-
-    override fun onResume() = super.onResume().also { getWeather() }
 
     private fun getWeather() = fusedLocationClient.lastLocation
         .addOnSuccessListener { location: Location? ->
@@ -119,7 +114,7 @@ class WeatherFragment : Fragment() {
         } catch (e: Throwable) {
             "Default"
         }
-        tv_Temp.text = "Current Temperature: ${json.current.temp.toString()}"
+        tv_Temp.text = "Current Temperature: ${json.current.temp}"
         tv_Forcast.text = " Current Weather Conditions: ${json.current.weather[0].main} ${json.current.weather[0].description}"
         va.setHours(json.hourly)
     }

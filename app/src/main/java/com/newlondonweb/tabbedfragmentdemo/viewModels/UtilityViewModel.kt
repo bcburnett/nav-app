@@ -27,48 +27,23 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.newlondonweb.tabbedfragmentdemo.R
 import com.newlondonweb.tabbedfragmentdemo.data.KalmanProcessor
 
-class UtilityViewModel(application: Application) : AndroidViewModel(application)  {
+class UtilityViewModel(application: Application) : AndroidViewModel(application) {
 
-lateinit var locationManager: LocationManager
-    lateinit var mainHandler: Handler
-    private val kalmanProcessor = KalmanProcessor()
-    private val track:ArrayList<Location> by lazy { arrayListOf<Location>() }
-    lateinit var mMap: GoogleMap
+
+    private val track: ArrayList<Location> by lazy { arrayListOf<Location>() }
+
     internal val locations: LiveData<List<Location>>
         get() = myLocations
+
     private val myLocations = MutableLiveData<List<Location>>()
 
-    private val myloc = arrayListOf(
-        LocationKt()
-            .apply {
-                setLatitude(0.0)
-                setLongitude(0.0)})
+    val locationManager = this.getApplication<Application>()
+        .getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-
-
-    fun setup(mMap: GoogleMap) {
-        kalmanProcessor.reset(8, 5)
-        kalmanProcessor.setLocationCallback(5000L){ locationKt -> processLocation(locationKt) }
-        locationManager = this.getApplication<Application>().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        mainHandler = Handler(Looper.getMainLooper())
-    }
-
-    fun processLocation(locationKt: LocationKt) {
-        if (myloc.last().getLatitude() != locationKt.getLatitude() || myloc.last().getLongitude() != locationKt.getLongitude()) {
-            try {
-                locationKt.setAccuracy(track.last().accuracy.toDouble())
-            }catch (e:Exception){return}
-
-            myloc.add(locationKt)
-            myLocations.value=track.takeLast(10)
-        }
-    }
+    val mainHandler = Handler(Looper.getMainLooper())
 
     val updateScreen = object : Runnable {
-
-        @SuppressLint("MissingPermission")
         override fun run() {
-
             if (ActivityCompat.checkSelfPermission(
                     application,
                     Manifest.permission.ACCESS_FINE_LOCATION
@@ -76,16 +51,16 @@ lateinit var locationManager: LocationManager
                     application,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                return
-            }
+            ) return
+
             locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
-                1000L,
-                0f,
+                5000L,
+                6f,
                 locationListener
             )
-            mainHandler.postDelayed(this, 5000L)
+
+            mainHandler.postDelayed(this, 10000L)
         }
 
         private val locationListener: LocationListener = object : LocationListener {
@@ -94,55 +69,13 @@ lateinit var locationManager: LocationManager
             override fun onProviderDisabled(p0: String?) {}
             override fun onLocationChanged(location: Location) {
                 track.add(location)
-                Log.d("markerlist", location.accuracy.toString())
-                kalmanProcessor.process(avgLocs(track.takeLast(5) ))
+                myLocations.value = track.takeLast(10)
+                track.clear()
+                track.addAll(myLocations.value!!)
                 Log.d("markerlist", location.toString())
             }
         }
     }
-
-    val location = Location("")
-
-    fun reset(latLng: LatLng) {
-        val loc = LocationKt()
-        loc.setLatitude(latLng.latitude)
-        loc.setLongitude(latLng.longitude)
-        loc.setAccuracy(0.0)
-        kalmanProcessor.reset(8,2)
-        kalmanProcessor.process(fromLocationKt(loc))
-        kalmanProcessor.process(fromLocationKt(loc))
-        kalmanProcessor.process(fromLocationKt(loc))
-        kalmanProcessor.process(fromLocationKt(loc))
-        kalmanProcessor.process(fromLocationKt(loc))
-    }
-
-    fun avgLocs(list: List<Location>) : Location{
-        var lat = 0.0
-        var lon = 0.0
-        for(l in list){
-            lat += l.latitude
-            lon += l.longitude
-        }
-        lat /= list.size
-        lon /= list.size
-        val loc = list.last()
-        loc.latitude = lat
-        loc.longitude = lon
-        return loc
-    }
-
-    fun fromLocationKt(data: LocationKt): Location {
-        return Location("").apply {
-            latitude= data.getLatitude()
-            longitude= data.getLongitude()
-            accuracy = data.getAccuracy().toFloat()
-            altitude = data.getAltitude()
-            bearing= data.getBearing().toFloat()
-            speed= data.getSpeed().toFloat()
-            time = data.getTimestamp()
-        }
-    }
-
 
 
 }

@@ -60,7 +60,7 @@ class WeatherAdapter(
         holder.humidity.text = "Humidity: "+currentHour.humidity.toString()
         holder.feelsLike.text = "Feels Like: "+currentHour.feels_like.toString()
         holder.cloud.text = "Cloud Cover: "+currentHour.clouds.toString()
-        holder.wind.text = "Wing Speed: "+currentHour.wind_speed.toString()
+        holder.wind.text = "Wind Speed: "+currentHour.wind_speed.toString()
         holder.forecast.text = "Forecast: ${currentHour.weather[0].main} ${currentHour.weather[0].description}"
     }
 }
