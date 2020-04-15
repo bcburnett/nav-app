@@ -8,6 +8,7 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Environment.getExternalStoragePublicDirectory
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -190,14 +191,14 @@ class NoteFragment : Fragment(), LifecycleOwner {
                 mfile = File.createTempFile(
                     "JPEG_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())}_",
                     ".webp",
-                    this.context!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)).apply { currentPhotoPath = absolutePath }
+                    getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)).apply { currentPhotoPath = absolutePath }
 
                 val photoURI: Uri = FileProvider.getUriForFile(
                     this.context!!,
                     "com.newlondonweb.tabbedfragmentdemo.fileprovider",
                     mfile!!
                 )
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
             }
         }

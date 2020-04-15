@@ -19,6 +19,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
@@ -49,14 +50,14 @@ import java.util.ArrayList
 
 private const val REQUEST_IMAGE_CAPTURE = 1
 
-class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
+class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback, OnClickListener {
     lateinit var mMap: GoogleMap
 
     companion object {
         @Volatile
         private var INSTANCE: UtilityFragment? = null
         fun getInstance(): UtilityFragment {
-            if(INSTANCE == null) INSTANCE=UtilityFragment()
+            if (INSTANCE == null) INSTANCE = UtilityFragment()
             return INSTANCE as UtilityFragment
         }
     }
@@ -86,44 +87,41 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
         }
 
 //        // observers
-        vm.locations.observe(viewLifecycleOwner, Observer {doDisplay(it)})
+        vm.locations.observe(viewLifecycleOwner, Observer { doDisplay(it) })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(map != null) {
-            map.onCreate(null)
-            map.onResume()
-            map.getMapAsync(this)
+        map?.apply {
+            onCreate(null)
+            onResume()
+            getMapAsync(this@UtilityFragment)
         }
     }
 
 
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        mMap.mapType=GoogleMap.MAP_TYPE_NORMAL
+        mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
         vm.updateScreen.run()
-
     }
 
-    private fun doDisplay (locList: List<Location>) {
-        if(!::mMap.isInitialized) return
+    private fun doDisplay(locList: List<Location>) {
+        if (!::mMap.isInitialized) return
 
-        val kml =  resources.openRawResource(R.raw.waldenstreetmarket)
-        Log.d("marker", locList.last().accuracy.toString())
-        acc_view.text=locList.last().accuracy.toString()
+        val kml = resources.openRawResource(R.raw.waldenstreetmarket)
+
+        acc_view.text = locList.last().accuracy.toString()
         mMap.clear()
 
         try {
-            val kmlLayer =KmlLayer(mMap,kml,this.requireContext())
+            val kmlLayer = KmlLayer(mMap, kml, this.requireContext())
             val pathPoints = ArrayList<LatLng>()
 
             if (kmlLayer.containers != null) {
                 kmlLayer.containers.forEach { kmlContainer ->
-                    kmlContainer.placemarks.forEach{
-                        if(it.geometry.geometryType == "Point"){
+                    kmlContainer.placemarks.forEach {
+                        if (it.geometry.geometryType == "Point") {
                             pathPoints.add(it.geometry.geometryObject as LatLng)
                         }
                     }
@@ -134,26 +132,40 @@ class UtilityFragment : Fragment(), LifecycleOwner, OnMapReadyCallback {
                 mMap.addMarker(MarkerOptions().position(it).alpha(0.25F))
             }
             kmlLayer.addLayerToMap()
-        }catch (e:Exception){Log.d("marker",e.toString()); return}
+        } catch (e: Exception) {
+            Log.d("marker", e.toString()); return
+        }
 
         val me = LatLng(locList.last().latitude, locList.last().longitude)
         locList.forEach {
-            Log.d("marker",it.toString())
+            Log.d("marker", it.toString())
             mMap.addMarker(
                 MarkerOptions()
                     .position(LatLng(it.latitude, it.longitude))
                     .title(me.toString())
-                    .icon(BitmapDescriptorFactory.defaultMarker()))
+                    .icon(BitmapDescriptorFactory.defaultMarker())
+            )
         }
 
 
         mMap.addCircle(
             CircleOptions()
-                .center(me )
-                .radius(locList.last().accuracy.toDouble()))
+                .center(me)
+                .radius(locList.last().accuracy.toDouble())
+        )
 
-        val zoom:Float =if(mMap.cameraPosition.zoom.toInt() == 2) 16f else mMap.cameraPosition.zoom
+        val zoom: Float =
+            if (mMap.cameraPosition.zoom.toInt() == 2) 16f else mMap.cameraPosition.zoom
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(me, zoom))
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    override fun onClick(v: View?) {
+        Log.d("marker", v?.tag.toString())
     }
 
 

@@ -63,6 +63,8 @@ class UtilityViewModel(application: Application) : AndroidViewModel(application)
             mainHandler.postDelayed(this, 10000L)
         }
 
+
+
         private val locationListener: LocationListener = object : LocationListener {
             override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {}
             override fun onProviderEnabled(p0: String?) {}

@@ -4,12 +4,12 @@
         "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/drawable_ic_volume_off_black_24dp.xml.flat",
-        "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/drawable/ic_volume_off_black_24dp.xml"
-    },
-    {
         "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/layout-land_layout_add.xml.flat",
         "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/layout-land/layout_add.xml"
+    },
+    {
+        "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/drawable_ic_volume_off_black_24dp.xml.flat",
+        "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/drawable/ic_volume_off_black_24dp.xml"
     },
     {
         "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -32,12 +32,12 @@
         "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/layout/frag3_fragment.xml"
     },
     {
-        "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/drawable_s2.webp.flat",
-        "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/drawable/s2.webp"
-    },
-    {
         "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/drawable_s2.webp.flat",
+        "source": "/home/brian/archive/AndroidStudioProjects/nav-app/app/src/main/res/drawable/s2.webp"
     },
     {
         "merged": "/home/brian/archive/AndroidStudioProjects/nav-app/app/build/intermediates/res/merged/debug/layout_utility_fragment.xml.flat",

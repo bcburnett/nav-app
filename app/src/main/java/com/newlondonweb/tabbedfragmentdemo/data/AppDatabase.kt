@@ -9,7 +9,7 @@ import com.newlondonweb.tabbedfragmentdemo.data.notes.NoteDao
 import com.newlondonweb.tabbedfragmentdemo.data.todo.Todo
 import com.newlondonweb.tabbedfragmentdemo.data.todo.TodoDao
 
-@Database(entities = [Note::class, Todo::class], version = 3,exportSchema = false)
+@Database(entities = [Note::class, Todo::class], version = 4,exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
